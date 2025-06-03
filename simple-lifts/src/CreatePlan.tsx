@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import moment from "moment";
 
-// Types
 interface Workout {
   name: string;
   startingWeight: number;
@@ -30,7 +29,6 @@ interface PlanDay {
   logs: LoggedWorkout[];
 }
 
-// Constants
 const liftingDaysOfWeek = [1, 3, 5]; // Monday, Wednesday, Friday
 const totalWeeks = 24;
 
@@ -140,7 +138,6 @@ const updateFutureWorkouts = (
   return newPlan;
 };
 
-// Main Component
 export default function WorkoutPlan() {
   const [workoutsA, setWorkoutsA] = useState<Workout[]>(defaultA);
   const [workoutsB, setWorkoutsB] = useState<Workout[]>(defaultB);
