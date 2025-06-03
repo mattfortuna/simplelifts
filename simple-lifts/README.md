@@ -1,4 +1,15 @@
-# Getting Started with Create React App
+Deployment: https://simplelifts-9d6a.vercel.app/
+
+Some Potential Improvements:
+
+- More broken up code: Replace all commented code with well-named functions
+
+- Email or text notifications for workout days
+- UI updates
+    - More impactful for completing a workout (check it off, congratulations message)
+    -
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

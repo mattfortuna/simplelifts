@@ -24,7 +24,7 @@ interface LoggedWorkout {
 }
 
 interface PlanDay {
-  date: string; // YYYY-MM-DD
+  date: string;
   dayName: string;
   logs: LoggedWorkout[];
 }
@@ -91,13 +91,13 @@ export default function WorkoutPlan() {
     const newPlan: Record<string, PlanDay> = {};
     let startDate = moment().startOf("week").add(1, "days"); // Monday this week
 
-    // Find next lifting day on or after today
+    // Next lifting day on or after today
     while (!liftingDaysOfWeek.includes(startDate.day())) {
       startDate = startDate.add(1, "day");
     }
 
     for (let week = 0; week < totalWeeks; week++) {
-      // Determine week pattern ABA or BAB
+      // Week pattern ABA or BAB
       const pattern = week % 2 === 0 ? ["A", "B", "A"] : ["B", "A", "B"];
 
       for (let i = 0; i < liftingDaysOfWeek.length; i++) {
@@ -106,17 +106,16 @@ export default function WorkoutPlan() {
         const dateStr = currentDate.format("YYYY-MM-DD");
         const dayName = currentDate.format("ddd");
 
-        // Choose workouts for the day
+        // Workouts for the day
         const dayType = pattern[i];
         const dayWorkouts = dayType === "A" ? workoutsA : workoutsB;
 
-        // Calculate week index for increases (full weeks from startDate)
-        // We treat every 3 lifting days as one week cycle.
+        // Week index for increases (full weeks from startDate)
         const weekIndex = week;
 
         const logs = dayWorkouts.map((w) => {
           let weight = w.startingWeight;
-          // Increase by 5% for each week
+          // Increase by 5% each week
           for (let inc = 0; inc < weekIndex; inc++) {
             weight = increaseBy5Percent(weight);
           }
@@ -135,7 +134,7 @@ export default function WorkoutPlan() {
     setEditLogs(plan[date].logs.map((w) => ({ ...w }))); // copy to local state
   };
 
-  // Handle weight change in dialog
+  // Handle weight change
   const handleWeightChange = (idx: number, val: string) => {
     let weight = parseInt(val);
     if (isNaN(weight) || weight < 0) weight = 0;
@@ -193,16 +192,13 @@ export default function WorkoutPlan() {
     setEditDate(null);
   };
 
-  // Find the next workout date
+  // Next workout date
   const todayStr = moment().format("YYYY-MM-DD");
   const sortedPlanDates = Object.keys(plan).sort();
   const nextWorkoutDate = sortedPlanDates.find((date) => date >= todayStr);
 
   return (
     <Stack spacing={3} sx={{ p: 3, maxWidth: 900, margin: "auto" }}>
-      <Typography variant="h2" align="center" sx={{ fontWeight: "bold", mb: 2 }}>
-        Workouts
-      </Typography>
       <Stack direction="row" spacing={4} justifyContent="center">
         <Stack spacing={1} sx={{ width: 1 / 2 }}>
           <Typography variant="h6" textAlign="center">
@@ -397,7 +393,6 @@ export default function WorkoutPlan() {
           })}
       </Stack>
 
-      {/* Edit Logs Dialog */}
       <Dialog open={!!editDate} onClose={() => setEditDate(null)} maxWidth="sm" fullWidth>
         <DialogTitle>Edit Workout Log for {editDate}</DialogTitle>
         <DialogContent>
@@ -410,7 +405,6 @@ export default function WorkoutPlan() {
                 value={log.weight}
                 onChange={(e) => handleWeightChange(i, e.target.value)}
                 sx={{ width: 100 }}
-                inputProps={{ min: 0 }}
               />
               <Typography>lbs</Typography>
             </Stack>
