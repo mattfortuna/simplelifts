@@ -209,7 +209,7 @@ export default function WorkoutPlan() {
     setEditDate(null);
   };
 
-  // For UI highlighting
+  // UI highlighting
   const todayStr = moment().format("YYYY-MM-DD");
   const sortedPlanDates = Object.keys(plan).sort();
   const nextWorkoutDate = sortedPlanDates.find((date) => date >= todayStr);
