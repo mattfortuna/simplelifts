@@ -262,7 +262,7 @@ export default function WorkoutPlan() {
       <Divider />
 
       <Typography variant="h5" textAlign="center">
-        Workout Plan
+        Your Plan
       </Typography>
 
       <Stack spacing={2}>
