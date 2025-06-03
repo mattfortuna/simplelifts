@@ -77,7 +77,7 @@ const getWorkoutLogs = (dayWorkouts: Workout[], weekIndex: number): LoggedWorkou
     return { name: w.name, weight };
   });
 
-// Main plan generation algorithm
+// Generate Plan Algorithm
 const generateNewPlan = (
   workoutsA: Workout[],
   workoutsB: Workout[]
