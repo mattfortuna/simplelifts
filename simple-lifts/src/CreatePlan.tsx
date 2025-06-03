@@ -35,7 +35,6 @@ const totalWeeks = 24;
 const roundToNearest5 = (weight: number) => Math.round(weight / 5) * 5;
 const increaseBy5Percent = (weight: number) => roundToNearest5(weight * 1.05);
 
-// Initial Data
 const defaultA = localStorage.getItem("workoutsA")
   ? JSON.parse(localStorage.getItem("workoutsA")!)
   : [
@@ -49,7 +48,6 @@ const defaultB = localStorage.getItem("workoutsB")
       { name: "Deadlift", startingWeight: 180 },
     ];
 
-// Helper Functions
 const getStartingDate = () => {
   let date = moment().startOf("week").add(1, "days");
   while (!liftingDaysOfWeek.includes(date.day())) {
